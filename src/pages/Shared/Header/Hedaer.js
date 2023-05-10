@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from '../../../assets/logo.svg';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 const Hedaer = () => {
+    const {user} = useContext(AuthContext);
     const menuItems = <>
            <li className='font-semibold	'><Link to="/">Home</Link></li>
-           <li className='font-semibold	'><Link to="/login">Login</Link></li>
+           {
+                user?.email ?
+                <>
+                   <li className='font-semibold	'><Link to="/orders">Order</Link></li>
+                </>
+                :
+                <li className='font-semibold	'><Link to="/login">Login</Link></li>
+
+           }
     </>
     return (
         <div className="h-20  mb-12 navbar pt-12 bg-base-100">
